@@ -1,0 +1,47 @@
+Chapter 2: Methodology
+2.1 Introduction
+This chapter explains the tools and methods used to build FitarSelf, a bilingual website for OBD-II fault code lookup and repair guidance. The project was developed as a web application where car owners and mechanics can search fault codes, view cars, find mechanics, and read repair guides in simple language. This chapter covers the development approach, tools, system architecture, database design, and key features.
+2.2 Development Methodology
+The Agile development methodology was chosen for this project. Instead of building everything at once, the project was divided into four phases. Each phase was built, tested, and reviewed before moving to the next. This allowed for early feedback and quick problem resolution.
+Phase 1: Core features including the car database, fault code system, mechanic profiles, and user authentication.
+Phase 2: Reviews and ratings system with mechanic verification badges.
+Phase 3: Real-time chat between users and mechanics using AJAX polling.
+Phase 4: Parts marketplace where mechanics can sell automotive parts.
+2.3 Tools and Technologies Used
+2.3.1 Backend Framework: Laravel 13
+Laravel is a PHP web framework that follows the Model-View-Controller (MVC) pattern. It was selected because it provides built-in tools for authentication, database management, routing, and templating. This allowed the application to be built securely and efficiently.
+Key Laravel features used in this project include the Eloquent ORM for database operations without writing SQL queries, Blade templating for reusable layouts and components, migrations for version-controlled database schema, seeders to populate the database with sample data, middleware for authentication and role-based access control, Laravel Breeze for login and registration scaffolding, and Filament for the administrator panel.
+2.3.2 Database: MySQL
+MySQL is a relational database management system used to store all application data in structured tables. The database contains more than 15 tables including users, cars, fault_codes, reviews, messages, parts, orders, and pivot tables for many-to-many relationships.
+Several key database design decisions were made. Polymorphic relationships allow a single reviews table to work with both cars and mechanics. JSON columns store flexible data such as mechanic specialties and car specifications. All content is stored in both English and Kurdish using bilingual fields with language suffixes.
+2.3.3 Frontend Technologies
+The frontend uses Blade, which is the Laravel template engine for creating reusable layouts and components. Tailwind CSS provides a utility-first CSS framework for the dark theme and responsive design across all devices. Alpine.js is a lightweight JavaScript library used for the mobile navigation menu and dropdown components. Vanilla JavaScript handles the image slider on car detail pages, live search filtering on the brand directory, and the AJAX chat system for real-time messaging.
+2.3.4 Development Tools
+Visual Studio Code was the primary code editor used, with Laravel extensions for autocompletion and navigation. Composer managed PHP packages and dependencies. NPM with Vite handled frontend asset bundling and compilation. Git provided version control throughout the development. MySQL Workbench was used for visual database management and query testing.
+2.4 System Architecture
+FitarSelf follows a client-server architecture. The browser sends HTTP requests to the Laravel server. The server processes these requests through routes, which direct them to the appropriate controllers. The controllers interact with models, which communicate with the MySQL database using Eloquent ORM. The views render Blade templates with the retrieved data and send HTML back to the browser.
+The Laravel MVC pattern separates database logic (Models), user interface (Views), and application logic (Controllers). Authentication middleware protects routes that require login. The guest middleware prevents logged-in users from accessing the login and register pages.
+2.5 Database Design
+The database was designed to support all required features while maintaining data integrity and flexibility. Below is an overview of the most important tables.
+The users table stores all account information including name, email, password, role (admin, mechanic, or user), phone, city, and verification status for mechanics. The cars table contains the vehicle database with make, model, year, engine type, horsepower, oil capacity in liters, hydraulic fluid information, and fuel consumption measured in liters per 100 kilometers. The fault_codes table holds OBD-II diagnostic codes with code number, type (P, B, C, U), title in both languages, description, symptoms, possible causes, step-by-step fix instructions, and severity level. The reviews table uses a polymorphic design that can be attached to either cars or mechanics, storing the rating from 1 to 5 and the review text in both languages. The mechanic_details table extends user profiles with specialization, workshop information, and specialty tags stored as JSON. The messages table enables chat functionality with sender, receiver, message text, and read status. The user_cars table creates a connection between users and the cars they own. The parts table allows mechanics to list automotive parts for sale with price, condition, and compatibility information.
+2.6 Key Features Implemented
+2.6.1 User Authentication and Roles
+The system supports three roles: Admin, Mechanic, and User. There are separate registration forms for users and mechanics. When mechanics register, they select their specialties from a list of options including Engine, Electrical, Diagnostics, Brakes, Suspension, Transmission, AC, Oil, Body, and ECU Tuning. Email verification and password reset functionality are included.
+2.6.2 Car Database
+An A-Z directory of more than 100 car brands is displayed as a grid with brand logos. Users can click any brand to see its available models. Each car detail page includes an image slider built with JavaScript for viewing multiple car photos. Technical specifications include engine type, horsepower, transmission type, oil capacity in liters, oil density type, hydraulic fluid capacity in liters, hydraulic fluid type, and fuel consumption for city, highway, and combined driving measured in liters per 100 kilometers.
+2.6.3 Fault Code Lookup
+The system contains 28 OBD-II diagnostic trouble codes with severity levels including Low, Medium, High, and Critical. Each code includes a detailed description, observable symptoms, possible causes ranked by likelihood, and a step-by-step fix guide written in simple human language that a regular person can understand. Content is bilingual, available in both English and Sorani Kurdish. Users can filter codes by type (P-Codes for powertrain, B-Codes for body, C-Codes for chassis, U-Codes for network) and search by code number or keyword with live filtering.
+2.6.4 Mechanic Directory
+Mechanics are listed with verification status, specialization, workshop information, and a link to view their location on Google Maps. Users can filter mechanics by specialty to find the right professional for their problem. Each mechanic profile displays customer reviews and average ratings.
+2.6.5 Reviews and Ratings
+A polymorphic review system means one table handles reviews for both cars and mechanics. Users give a 5-star rating along with a text review. Users can delete their own reviews. Average ratings are automatically calculated and displayed.
+2.6.6 Real-Time Chat
+The AJAX-based messaging system allows users and mechanics to communicate. Messages are grouped by conversation, and unread message counters are displayed in the dashboard.
+2.6.7 Parts Marketplace
+Mechanics can list automotive parts for sale with details including price, condition, brand, and compatible vehicles. Parts are linked to the mechanic's profile so buyers can see who is selling.
+2.6.8 User Profiles
+Users can mark cars they own through an "Own This Car" button on car detail pages. Owned cars appear on the user dashboard. A bio section allows users to describe themselves.
+2.7 Testing
+The application was tested using several methods. Manual testing involved checking all pages, forms, buttons, links, and filters across different browsers. Browser developer tools were used to verify responsive design on mobile, tablet, and desktop screen sizes. Laravel Tinker, the command-line interface, was used to test database queries and verify data integrity. Route testing confirmed that all URLs return the correct pages and that authentication middleware protects private routes as expected.
+2.8 Summary
+FitarSelf was built using Laravel 13 with MySQL as the database, Blade for templating, and Tailwind CSS for styling. It provides a complete platform for car owners and mechanics to look up OBD-II fault codes with step-by-step repair guides, browse car specifications, find mechanics by specialty, chat in real time, and buy and sell parts. The system supports both English and Sorani Kurdish and is designed to make technical automotive information accessible to regular people, filling the research gap identified in the literature review.

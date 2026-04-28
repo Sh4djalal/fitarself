@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class FaultCode extends Model
+{
+    protected $fillable = [
+        'code', 'code_type', 'title_en', 'title_ku',
+        'description_en', 'description_ku', 'symptoms_en', 'symptoms_ku',
+        'possible_causes_en', 'possible_causes_ku', 'severity', 'system',
+    ];
+
+    public function cars()
+    {
+        return $this->belongsToMany(Car::class, 'car_fault_code')
+                    ->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function savedByUsers()
+    {
+        return $this->morphMany(SavedItem::class, 'savable');
+    }
+
+    public function getSeverityColorAttribute()
+    {
+        return match($this->severity) {
+            'critical' => 'red',
+            'high' => 'orange',
+            'medium' => 'yellow',
+            'low' => 'green',
+            default => 'gray',
+        };
+    }
+}

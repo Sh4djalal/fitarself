@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,77 +12,65 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'reviewable_type' => 'required|in:App\Models\Car,App\Models\User',
+            'reviewable_type' => 'required|string',
             'reviewable_id' => 'required|integer',
             'rating' => 'required|integer|min:1|max:5',
-            'review_text_en' => 'required|string|min:10|max:1000',
-            'review_text_ku' => 'nullable|string|max:1000',
+            'review_text' => 'required|string|min:3',
         ]);
 
-        $exists = Review::where('user_id', Auth::id())
-            ->where('reviewable_type', $request->reviewable_type)
-            ->where('reviewable_id', $request->reviewable_id)
-            ->exists();
+        $review = new Review();
+        $review->user_id = Auth::id();
+        $review->reviewable_type = $request->reviewable_type;
+        $review->reviewable_id = $request->reviewable_id;
+        $review->rating = $request->rating;
+        $review->review_text_en = $request->review_text;
+        $review->review_text_ku = $request->review_text;
+        $review->is_approved = true;
+        $review->save();
 
-        if ($exists) {
-            return back()->with('error', 'You have already reviewed this item.');
-        }
-
-        if ($request->reviewable_type === 'App\Models\User') {
-            $reviewedUser = \App\Models\User::find($request->reviewable_id);
-            if ($reviewedUser && $reviewedUser->id === Auth::id()) {
-                return back()->with('error', 'You cannot review yourself.');
+        // Update the average rating for the reviewable item (only for Car models)
+        if ($request->reviewable_type === 'App\\Models\\Car') {
+            $car = Car::find($request->reviewable_id);
+            if ($car) {
+                $averageRating = $car->reviews()->where('is_approved', true)->avg('rating');
+                $car->average_rating = $averageRating ?: 0;
+                $car->review_count = $car->reviews()->where('is_approved', true)->count();
+                $car->save();
             }
         }
 
-        $review = Review::create([
-            'user_id' => Auth::id(),
-            'reviewable_type' => $request->reviewable_type,
-            'reviewable_id' => $request->reviewable_id,
-            'rating' => $request->rating,
-            'review_text_en' => $request->review_text_en,
-            'review_text_ku' => $request->review_text_ku ?? $request->review_text_en,
-            'is_approved' => true,
-        ]);
-
-        $this->updateAverageRating($request->reviewable_type, $request->reviewable_id);
-
-        return back()->with('success', 'Review submitted successfully!');
+        return redirect()->back()->with('success', 'Review submitted successfully!');
     }
 
-    public function destroy(Review $review)
+    public function destroy($id)
     {
-        if ($review->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
+        $review = Review::findOrFail($id);
+        
+        if ($review->user_id !== Auth::id()) {
             abort(403);
         }
-
-        $reviewableType = $review->reviewable_type;
-        $reviewableId = $review->reviewable_id;
-
+        
+        $reviewable = $review->reviewable;
         $review->delete();
-
-        $this->updateAverageRating($reviewableType, $reviewableId);
-
-        return back()->with('success', 'Review deleted.');
+        
+        // Update the average rating for the reviewable item (only for Car models)
+        if ($reviewable && $reviewable instanceof Car) {
+            $averageRating = $reviewable->reviews()->where('is_approved', true)->avg('rating');
+            $reviewable->average_rating = $averageRating ?: 0;
+            $reviewable->review_count = $reviewable->reviews()->where('is_approved', true)->count();
+            $reviewable->save();
+        }
+        
+        return redirect()->back()->with('success', 'Review deleted successfully!');
     }
 
-    private function updateAverageRating($type, $id)
+    public function userReviews()
     {
-        $avg = Review::where('reviewable_type', $type)
-            ->where('reviewable_id', $id)
-            ->where('is_approved', true)
-            ->avg('rating');
-
-        $count = Review::where('reviewable_type', $type)
-            ->where('reviewable_id', $id)
-            ->where('is_approved', true)
-            ->count();
-
-        if ($type === 'App\Models\Car') {
-            \App\Models\Car::where('id', $id)->update([
-                'average_rating' => $avg ?? 0,
-                'review_count' => $count,
-            ]);
-        }
+        $reviews = Review::where('user_id', Auth::id())
+            ->with('reviewable')
+            ->latest()
+            ->paginate(10);
+        
+        return view('profile.reviews', compact('reviews'));
     }
 }

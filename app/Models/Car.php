@@ -10,7 +10,7 @@ class Car extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'make', 'model', 'year', 'trim', 'engine_type', 'horsepower',
+        'make', 'model','year_start', 'year_end', 'year', 'region', 'trim', 'engine_type', 'horsepower',
         'zero_to_100_kmh', 'top_speed_kmh', 'transmission', 'gears',
         'drivetrain', 'fuel_type', 'body_type', 'oil_capacity_l',
         'oil_density_type', 'hydraulic_capacity_l', 'hydraulic_fluid_type',
@@ -19,6 +19,8 @@ class Car extends Model
     ];
 
     protected $casts = [
+        'year_start' => 'integer',
+        'year_end' => 'integer',
         'year' => 'integer',
         'horsepower' => 'integer',
         'gears' => 'integer',
@@ -38,11 +40,7 @@ class Car extends Model
         return $this->morphMany(Review::class, 'reviewable');
     }
 
-    public function faultCodes()
-    {
-        return $this->belongsToMany(FaultCode::class, 'car_fault_code')
-                    ->withTimestamps();
-    }
+    
 
     public function savedByUsers()
     {

@@ -11,27 +11,22 @@ class CarController extends Controller
     {
         $query = Car::query();
 
-        if ($request->has('make')) {
-            $query->where('make', $request->make);
+        if ($request->filled('make')) {
+            $query->where('make', $request->get('make'));
+            $cars = $query->orderBy('make')->orderBy('model')->get();
+        } else {
+            $cars = $query->orderBy('make')->orderBy('model')->paginate(12);
         }
-        if ($request->has('body_type')) {
-            $query->where('body_type', $request->body_type);
-        }
-        if ($request->has('fuel_type')) {
-            $query->where('fuel_type', $request->fuel_type);
-        }
-
-        $cars = $query->orderBy('make')->orderBy('model')->paginate(12);
+        
         $makes = Car::select('make')->distinct()->orderBy('make')->pluck('make');
 
         return view('cars.index', compact('cars', 'makes'));
     }
 
-    public function show(Car $car)
+    public function show($id)
     {
-        $car->load(['reviews' => function ($q) {
-            $q->where('is_approved', true)->latest()->limit(5);
-        }, 'reviews.user', 'faultCodes']);
+        $car = Car::findOrFail($id);
+        
 
         $relatedCars = Car::where('make', $car->make)
                           ->where('id', '!=', $car->id)
@@ -40,4 +35,17 @@ class CarController extends Controller
 
         return view('cars.show', compact('car', 'relatedCars'));
     }
+
+    public function model($make, $model)
+{
+    $model = urldecode($model);
+    $cars = Car::where('make', $make)
+               ->where('model', $model)
+               ->orderBy('year', 'desc')
+               ->get();
+               
+    $regions = $cars->pluck('region')->unique()->filter();
+    
+    return view('cars.model', compact('cars', 'make', 'model', 'regions'));
+}
 }

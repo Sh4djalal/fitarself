@@ -26,6 +26,10 @@ return new class extends Migration
             $table->string('theme_preference')->default('dark');
             $table->rememberToken();
             $table->timestamps();
+            
+            // Add index for faster email verification lookups
+            $table->index('email_verified_at');
+            $table->index('role');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

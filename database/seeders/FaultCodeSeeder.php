@@ -9,8 +9,6 @@ class FaultCodeSeeder extends Seeder
 {
     public function run(): void
     {
-       
-
         $codes = [
             // ==================== P-CODES ====================
             [
@@ -86,9 +84,9 @@ class FaultCodeSeeder extends Seeder
             [
                 'code' => 'P0300', 'code_type' => 'P', 'severity' => 'high',
                 'title_en' => 'Random/Multiple Cylinder Misfire',
-                'title_ku' => 'سوتانی هەڕەمەکی لە چەندین سلندەر',
-                'description_en' => 'Multiple cylinders are misfiring randomly. The engine is not firing properly and will shake noticeably.',
-                'description_ku' => 'چەندین سلندەر بە هەڕەمەکی تێکدەچن. مەکینە بە باشی کار ناکات و بە شێوەیەکی بەرچاو دەلەرزێت.',
+                'title_ku' => 'سوتانی هەڕەمەکی',
+                'description_en' => 'Random misfires across multiple cylinders. The engine is not firing properly and will shake noticeably.',
+                'description_ku' => 'سوتانی هەڕەمەکی لە چەندین سلندەر. مەکینە بە باشی کار ناکات و بە شێوەیەکی بەرچاو دەلەرزێت.',
                 'symptoms_en' => "Check Engine Light flashing — this means severe misfire!\nCar shakes badly, especially when stopped\nLack of power when accelerating\nHard to start the engine\nFuel smell from exhaust",
                 'symptoms_ku' => "ڕووناکی پشکنینی مەکینە دەڵەسکێت — واتە سوتانی توند!\nئۆتۆمبێل بە توندی دەلەرزێت\nنەبوونی هێز لە کاتی گازدان\nبە سەختی مەکینە دەست پێدەکات\nبۆنی سوتەمەنی لە دەرپەڕاو",
                 'possible_causes_en' => "Old or worn spark plugs — most common!\nBad ignition coils\nFuel quality is poor or water in fuel\nClogged fuel injectors\nVacuum leak from intake manifold",
@@ -100,9 +98,9 @@ class FaultCodeSeeder extends Seeder
             [
                 'code' => 'P0301', 'code_type' => 'P', 'severity' => 'critical',
                 'title_en' => 'Cylinder 1 Misfire Detected',
-                'title_ku' => 'سوتانی سلندەری ١',
-                'description_en' => 'Only cylinder 1 is misfiring. The problem is specific to that one cylinder.',
-                'description_ku' => 'تەنها سلندەری ١ تێکدەچێت. کێشەکە تایبەتە بەو یەک سلندەرە.',
+                'title_ku' => 'کێشەی سوتان لە سلندەری ١',
+                'description_en' => 'Cylinder 1 is misfiring. The problem is specific to that one cylinder.',
+                'description_ku' => 'سلندەری ١ کێشەی سوتانی هەیە. کێشەکە تایبەتە بەو یەک سلندەرە.',
                 'symptoms_en' => "Check Engine Light flashing or on\nCar shakes at idle\nLoss of power\nMore fuel consumption",
                 'symptoms_ku' => "ڕووناکی پشکنینی مەکینە دەڵەسکێت\nئۆتۆمبێل لە بێکاریدا دەلەرزێت\nلەدەستدانی هێز\nسوتەمەنی زیاتر",
                 'possible_causes_en' => "Spark plug #1 is bad — most likely\nIgnition coil #1 is failing\nFuel injector #1 is clogged or leaking\nLow compression in cylinder 1\nCracked valve or piston ring in cylinder 1",
@@ -111,9 +109,10 @@ class FaultCodeSeeder extends Seeder
                 'how_to_fix_ku' => "١. یەکەم، پڵگی فیشەری سلندەر ١ لەگەڵ سلندەرێکی تر (وەک سلندەر ٢) بگۆڕە. کۆدەکە بسڕەوە، مەکینە هەڵبکە. ئەگەر سوتانەکە چوو بۆ سلندەر ٢، پڵگەکە خراپ بووە — بیگۆڕە.\n٢. ئەگەر پڵگ نەبوو، کۆیلی داگیرسانیش هەمان شێوە بگۆڕە. ئەگەر سوتانەکە گواسترایەوە، ئەو کۆیلە بگۆڕە.\n٣. ئەگەر هەر لە سلندەر ١ مایەوە، پاککەرەوەی ئینجێکتەر بەکار بێنە. ئەگەر سوودی نەبوو، ئینجێکتەری #١ بگۆڕە.\n٤. خراپترین حاڵەت: پەستانی نزم — دووکەڵی سپی لە سەرپۆشی ڕۆن کاتێک دەکرێتەوە واتە رینگی پستۆن شکاوە. پێویستت بە میکانیکە.",
                 'system' => 'Engine / Ignition'
             ],
-                        [
+            [
                 'code' => 'P0401', 'code_type' => 'P', 'severity' => 'medium',
-                'title_en' => 'EGR Flow Insufficient', 'title_ku' => 'ڕێژەی EGR کەمە',
+                'title_en' => 'EGR Flow Insufficient',
+                'title_ku' => 'ڕێژەی EGR کەمە',
                 'description_en' => 'The EGR valve sends some exhaust back into the engine to reduce emissions. Not enough exhaust is flowing.',
                 'description_ku' => 'ڤاڵڤی EGR هەندێک گازی دەرپەڕاو دەنێرێتەوە بۆ کەمکردنەوەی دەرپەڕاندن. ڕێژەکەی کەمە.',
                 'symptoms_en' => "Check Engine Light on\nEngine knocking under acceleration\nRough idle\nFailed emissions test",
@@ -126,7 +125,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'P0420', 'code_type' => 'P', 'severity' => 'high',
-                'title_en' => 'Catalyst System Efficiency Below Threshold', 'title_ku' => 'کارایی کاتالیست نزمە',
+                'title_en' => 'Catalyst System Efficiency Below Threshold',
+                'title_ku' => 'کارایی کاتالیست نزمە',
                 'description_en' => 'The catalytic converter is not cleaning exhaust properly. Can be the converter itself or something causing it to fail.',
                 'description_ku' => 'کاتالیست بە باشی گازی دەرپەڕاو پاک ناکاتەوە.',
                 'symptoms_en' => "Check Engine Light on\nSulfur / rotten egg smell\nPoor fuel economy\nCar sluggish at high speeds",
@@ -139,7 +139,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'P0442', 'code_type' => 'P', 'severity' => 'medium',
-                'title_en' => 'EVAP System Small Leak Detected', 'title_ku' => 'دەرچوونی بچووکی EVAP',
+                'title_en' => 'EVAP System Small Leak Detected',
+                'title_ku' => 'دەرچوونی بچووکی EVAP',
                 'description_en' => 'Small leak in the fuel vapor system. Does NOT affect driving — emissions issue only.',
                 'description_ku' => 'دەرچوونێکی بچووک لە سیستەمی هەڵمی سوتەمەنی. کار ناکاتە سەر لێخوڕین.',
                 'symptoms_en' => "Check Engine Light on\nSlight fuel smell outside\nCar drives completely fine",
@@ -152,7 +153,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'P0455', 'code_type' => 'P', 'severity' => 'medium',
-                'title_en' => 'EVAP System Large Leak Detected', 'title_ku' => 'دەرچوونی گەورەی EVAP',
+                'title_en' => 'EVAP System Large Leak Detected',
+                'title_ku' => 'دەرچوونی گەورەی EVAP',
                 'description_en' => 'A large leak in the fuel vapor system. Usually easier to find than a small leak.',
                 'description_ku' => 'دەرچوونێکی گەورە لە سیستەمی هەڵمی سوتەمەنی.',
                 'symptoms_en' => "Check Engine Light on\nStrong fuel smell\nSlightly worse MPG",
@@ -165,7 +167,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'P0500', 'code_type' => 'P', 'severity' => 'high',
-                'title_en' => 'Vehicle Speed Sensor Malfunction', 'title_ku' => 'کێشەی هەستیاری خێرایی',
+                'title_en' => 'Vehicle Speed Sensor Malfunction',
+                'title_ku' => 'کێشەی هەستیاری خێرایی',
                 'description_en' => 'The speed sensor is not sending correct data. Your speedometer may not work correctly.',
                 'description_ku' => 'هەستیاری خێرایی داتای دروست نانێرێت. لەوانەیە خێرایی پێو کار نەکات.',
                 'symptoms_en' => "Speedometer not working or erratic\nCheck Engine Light on\nTransmission shifts roughly\nCruise control not working",
@@ -180,7 +183,8 @@ class FaultCodeSeeder extends Seeder
             // ==================== B-CODES ====================
             [
                 'code' => 'B0001', 'code_type' => 'B', 'severity' => 'critical',
-                'title_en' => 'Driver Airbag Circuit Open', 'title_ku' => 'کێشەی ئەیربەگی شۆفێر',
+                'title_en' => 'Driver Airbag Circuit Open',
+                'title_ku' => 'کێشەی ئەیربەگی شۆفێر',
                 'description_en' => 'The driver airbag has a broken circuit. In an accident, your airbag may NOT deploy!',
                 'description_ku' => 'هێڵی ئەیربەگی شۆفێر پچڕاوە. لە ڕووداوێکدا، ئەیربەگەکەت لەوانەیە کار نەکات!',
                 'symptoms_en' => "Airbag warning light on\nAirbag system disabled",
@@ -193,7 +197,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'B0028', 'code_type' => 'B', 'severity' => 'critical',
-                'title_en' => 'Passenger Airbag Circuit Low', 'title_ku' => 'کێشەی ئەیربەگی ڕێبوار',
+                'title_en' => 'Passenger Airbag Circuit Low',
+                'title_ku' => 'کێشەی ئەیربەگی ڕێبوار',
                 'description_en' => 'The passenger airbag circuit has low voltage. The passenger airbag may not work.',
                 'description_ku' => 'ڤۆڵتی هێڵی ئەیربەگی ڕێبوار نزمە. ئەیربەگی ڕێبوار لەوانەیە کار نەکات.',
                 'symptoms_en' => "Airbag warning light\nPassenger airbag disabled",
@@ -206,7 +211,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'B0100', 'code_type' => 'B', 'severity' => 'high',
-                'title_en' => 'Airbag System Fault', 'title_ku' => 'کێشەی سیستەمی ئەیربەگ',
+                'title_en' => 'Airbag System Fault',
+                'title_ku' => 'کێشەی سیستەمی ئەیربەگ',
                 'description_en' => 'General airbag system malfunction. Something is wrong with the SRS system.',
                 'description_ku' => 'کێشەی گشتی لە سیستەمی ئەیربەگ. شتێک لە SRS دا هەڵەیە.',
                 'symptoms_en' => "Airbag warning light on\nAirbag system may not deploy",
@@ -219,7 +225,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'B1200', 'code_type' => 'B', 'severity' => 'medium',
-                'title_en' => 'Fuel Sender Circuit Open', 'title_ku' => 'کێشەی ناردەری سوتەمەنی',
+                'title_en' => 'Fuel Sender Circuit Open',
+                'title_ku' => 'کێشەی ناردەری سوتەمەنی',
                 'description_en' => 'The fuel level sender in your gas tank is not working. Your gas gauge may be wrong.',
                 'description_ku' => 'ناردەری ئاستی سوتەمەنی لە بەنزین دەزگا کار ناکات. پێوەری بەنزین لەوانەیە هەڵە بێت.',
                 'symptoms_en' => "Fuel gauge not working or stuck\nInaccurate fuel reading\nCheck Engine Light",
@@ -232,7 +239,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'B1318', 'code_type' => 'B', 'severity' => 'medium',
-                'title_en' => 'Battery Voltage Low', 'title_ku' => 'ڤۆڵتی پاتری نزمە',
+                'title_en' => 'Battery Voltage Low',
+                'title_ku' => 'ڤۆڵتی پاتری نزمە',
                 'description_en' => 'The battery voltage is too low. Your car may have trouble starting soon.',
                 'description_ku' => 'ڤۆڵتی پاتری زۆر نزمە. لەوانەیە بەم زووانە ئۆتۆمبێلەکەت بە سەختی دەست پێبکات.',
                 'symptoms_en' => "Warning lights on\nHard to start engine\nElectrical issues (lights dim, radio cuts out)\nBattery dies overnight",
@@ -245,7 +253,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'B1410', 'code_type' => 'B', 'severity' => 'medium',
-                'title_en' => 'Driver Door Ajar Circuit', 'title_ku' => 'کێشەی هەستیاری دەرگای شۆفێر',
+                'title_en' => 'Driver Door Ajar Circuit',
+                'title_ku' => 'کێشەی هەستیاری دەرگای شۆفێر',
                 'description_en' => 'The sensor that tells if the driver door is open or closed is not working.',
                 'description_ku' => 'هەستیاری کرانەوە و داخستنی دەرگای شۆفێر کار ناکات.',
                 'symptoms_en' => "Door ajar light stays on\nInterior lights stay on and drain battery\nAlarm may go off randomly\nDoor may not lock properly",
@@ -256,10 +265,12 @@ class FaultCodeSeeder extends Seeder
                 'how_to_fix_ku' => "١. سویچی دەرگا بدۆزەرەوە — دوگمەیەکی لاستیکی بچووکە لە چوارچێوەی دەرگا. چەند جار پەنجەی پێدا بنێ. WD-40ی پێدا بپرژێنە. ئەگەر چارەسەر نەبوو، سویچەکە بگۆڕە (١٥-٤٠ دۆلار).",
                 'system' => 'Body / Doors'
             ],
-                        // ==================== C-CODES (Chassis) ====================
+
+            // ==================== C-CODES (Chassis) ====================
             [
                 'code' => 'C0035', 'code_type' => 'C', 'severity' => 'critical',
-                'title_en' => 'Left Front Wheel Speed Sensor', 'title_ku' => 'هەستیاری خێرایی تایەی پێشەوەی چەپ',
+                'title_en' => 'Left Front Wheel Speed Sensor',
+                'title_ku' => 'هەستیاری خێرایی تایەی پێشەوەی چەپ',
                 'description_en' => 'The sensor on your left front wheel is not reading speed correctly. ABS and traction control may be disabled.',
                 'description_ku' => 'هەستیاری سەر تایەی پێشەوەی چەپ خێرایی بە دروستی ناخوێنێتەوە. ABS و کۆنترۆڵی ڕاکێشان ناچالاک دەبن.',
                 'symptoms_en' => "ABS warning light on\nTraction control light on\nABS may not work in emergency braking\nBrake pedal may pulse oddly",
@@ -272,8 +283,9 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'C0040', 'code_type' => 'C', 'severity' => 'critical',
-                'title_en' => 'Right Front Wheel Speed Sensor', 'title_ku' => 'هەستیاری خێرایی تایەی پێشەوەی ڕاست',
-                'description_en' => 'Same as C0035 but for the right front wheel. ABS and traction control may not work.',
+                'title_en' => 'Right Front Wheel Speed Sensor',
+                'title_ku' => 'هەستیاری خێرایی تایەی پێشەوەی ڕاست',
+                'description_en' => 'Same as C0035 but for the right front wheel.',
                 'description_ku' => 'هەمان C0035 بەڵام بۆ تایەی پێشەوەی ڕاست.',
                 'symptoms_en' => "ABS light on\nTraction control disabled\nBrake pedal pulses\nSpeedometer may jump",
                 'symptoms_ku' => "ڕووناکی ABS\nکۆنترۆڵی ڕاکێشان ناچالاک\nپەدالی بڕێک دەلەرزێت",
@@ -285,7 +297,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'C1200', 'code_type' => 'C', 'severity' => 'critical',
-                'title_en' => 'ABS Pump Motor Circuit Open', 'title_ku' => 'هێڵی مۆتۆری پەمپی ABS کراوە',
+                'title_en' => 'ABS Pump Motor Circuit Open',
+                'title_ku' => 'هێڵی مۆتۆری پەمپی ABS کراوە',
                 'description_en' => 'The ABS pump motor circuit has a break. Your ABS system will NOT work in emergency situations.',
                 'description_ku' => 'هێڵی مۆتۆری پەمپی ABS پچڕاوە. سیستەمی ABS لە حاڵەتی لەناکاودا کار ناکات.',
                 'symptoms_en' => "ABS light on\nBrake pedal feels hard or different\nABS does not engage during hard braking\nGrinding or buzzing noise from ABS unit",
@@ -298,7 +311,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'C1222', 'code_type' => 'C', 'severity' => 'critical',
-                'title_en' => 'Brake Booster Pressure Sensor', 'title_ku' => 'هەستیاری پەستانی بۆستەری بڕێک',
+                'title_en' => 'Brake Booster Pressure Sensor',
+                'title_ku' => 'هەستیاری پەستانی بۆستەری بڕێک',
                 'description_en' => 'The brake booster pressure sensor is faulty. Your brake pedal may feel very hard to press.',
                 'description_ku' => 'هەستیاری پەستانی بۆستەری بڕێک تێکچووە. پەدالی بڕێک زۆر سەخت دەبێت.',
                 'symptoms_en' => "Very hard brake pedal — difficult to stop\nABS light on\nBrake warning light\nHissing sound from brake pedal area",
@@ -311,7 +325,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'C1500', 'code_type' => 'C', 'severity' => 'high',
-                'title_en' => 'Steering Angle Sensor', 'title_ku' => 'هەستیاری گۆشەی سەکان',
+                'title_en' => 'Steering Angle Sensor',
+                'title_ku' => 'هەستیاری گۆشەی سەکان',
                 'description_en' => 'The steering angle sensor is not working. Your stability control and traction control may be affected.',
                 'description_ku' => 'هەستیاری گۆشەی سەکان کار ناکات. کۆنترۆڵی سەقامگیری و ڕاکێشان کاریگەر دەبن.',
                 'symptoms_en' => "ESC/TCS light on\nSteering feels off-center\nTraction control activates unnecessarily\nSteering wheel not straight when driving straight",
@@ -322,10 +337,12 @@ class FaultCodeSeeder extends Seeder
                 'how_to_fix_ku' => "١. زۆر جار دوای ڕێکخستنی تایە ڕوودەدات — هەستیار پێویستی بە ڕێستکردنە. سەکان بە تەواوی بە چەپ و ڕاست بسوڕێنە ٣ جار. بۆ ٥ چرکە لە ناوەند ڕایبگرە. بە خێرایی زیاتر لە ٤٠ کم/س بڕۆ. میکانیک دەتوانێت بە ئامێری سکان لە ١٥ خولەکدا کالیبرەیت بکات.",
                 'system' => 'Chassis / Steering'
             ],
-                        // ==================== U-CODES (Network) ====================
+
+            // ==================== U-CODES (Network) ====================
             [
                 'code' => 'U0001', 'code_type' => 'U', 'severity' => 'high',
-                'title_en' => 'CAN Bus Communication Error', 'title_ku' => 'هەڵەی پەیوەندی CAN باس',
+                'title_en' => 'CAN Bus Communication Error',
+                'title_ku' => 'هەڵەی پەیوەندی CAN باس',
                 'description_en' => 'The CAN bus is the communication network between your car\'s computers. This error means modules can\'t talk to each other.',
                 'description_ku' => 'CAN باس تۆڕی پەیوەندی نێوان کۆمپیوتەرەکانی ئۆتۆمبێلە. ئەم هەڵەیە واتە مۆدیولەکان ناتوانن پێکەوە قسە بکەن.',
                 'symptoms_en' => "Multiple warning lights come on at once\nEngine may not start\nVarious electrical problems\nTransmission shifts oddly\nGauges stop working",
@@ -338,7 +355,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'U0100', 'code_type' => 'U', 'severity' => 'critical',
-                'title_en' => 'Lost Communication with ECM/PCM', 'title_ku' => 'پەیوەندی ECM ون بووە',
+                'title_en' => 'Lost Communication with ECM/PCM',
+                'title_ku' => 'پەیوەندی ECM ون بووە',
                 'description_en' => 'Your car\'s main computer (ECM) is not communicating. The engine may not run at all.',
                 'description_ku' => 'کۆمپیوتەری سەرەکی ئۆتۆمبێل (ECM) پەیوەندی ناکات. مەکینە لەوانەیە هەر کار نەکات.',
                 'symptoms_en' => "Engine won't start — cranks but no start\nNo communication with scan tool\nCheck Engine Light on\nMultiple warning lights",
@@ -351,7 +369,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'U0121', 'code_type' => 'U', 'severity' => 'high',
-                'title_en' => 'Lost Communication with ABS Module', 'title_ku' => 'پەیوەندی مۆدیولی ABS ون بووە',
+                'title_en' => 'Lost Communication with ABS Module',
+                'title_ku' => 'پەیوەندی مۆدیولی ABS ون بووە',
                 'description_en' => 'The ABS module is not communicating with the rest of the car. Your ABS will not work.',
                 'description_ku' => 'مۆدیولی ABS پەیوەندی لەگەڵ بەشی تری ئۆتۆمبێل ناکات. ABS کار ناکات.',
                 'symptoms_en' => "ABS light on\nBrake warning light may be on\nSpeedometer may stop working\nNormal brakes still work — just no ABS",
@@ -364,7 +383,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'U0140', 'code_type' => 'U', 'severity' => 'high',
-                'title_en' => 'Lost Communication with Body Control Module', 'title_ku' => 'پەیوەندی BCM ون بووە',
+                'title_en' => 'Lost Communication with Body Control Module',
+                'title_ku' => 'پەیوەندی BCM ون بووە',
                 'description_en' => 'The Body Control Module (BCM) runs your lights, windows, locks, and wipers. It\'s not communicating.',
                 'description_ku' => 'مۆدیولی کۆنترۆڵی بەدی (BCM) ڕووناکی، پەنجەرە، قوفڵ، و مسۆکەکان بەڕێوە دەبات. پەیوەندی ناکات.',
                 'symptoms_en' => "Power windows not working\nDoor locks acting crazy\nLights flicker or stay on\nWipers not working\nKey fob doesn't work",
@@ -377,7 +397,8 @@ class FaultCodeSeeder extends Seeder
             ],
             [
                 'code' => 'U0155', 'code_type' => 'U', 'severity' => 'high',
-                'title_en' => 'Lost Communication with Instrument Cluster', 'title_ku' => 'پەیوەندی پانێڵی ئامێرەکان ون بووە',
+                'title_en' => 'Lost Communication with Instrument Cluster',
+                'title_ku' => 'پەیوەندی پانێڵی ئامێرەکان ون بووە',
                 'description_en' => 'The instrument cluster (speedometer, gauges) is not communicating. Your dashboard may go blank.',
                 'description_ku' => 'پانێڵی ئامێرەکان (خێرایی پێو، پێوەرەکان) پەیوەندی ناکات. داشبۆرد لەوانەیە تاریک ببێت.',
                 'symptoms_en' => "Gauges all drop to zero\nWarning lights all come on\nNo speedometer reading\nDashboard goes completely dark\nOdometer not working",
@@ -388,69 +409,12 @@ class FaultCodeSeeder extends Seeder
                 'how_to_fix_ku' => "١. ڕێستکردنی پانێڵ تاقی بکە — پاتری بۆ ١٥ خولەک داببڕە و دووبارە بەلێوە. فیوزی پانێڵ بپشکنە. بە دەست بە سەر داشبۆرد بکێشە — هەندێک جار بەستەری شل کاتی چاک دەبێتەوە. ئەگەر چارەسەر نەبوو، پانێڵ پێویستی بە گۆڕینە (٢٠٠-٦٠٠ دۆلار).",
                 'system' => 'Network / IPC'
             ],
-
-            [
-                'code' => 'P0401', 'code_type' => 'P', 'severity' => 'medium',
-                'title_en' => 'EGR Flow Insufficient',
-                'title_ku' => 'ڕێژەی EGR کەمە',
-                'description_en' => 'The EGR valve sends some exhaust back into the engine to reduce emissions. This code means not enough exhaust is flowing.',
-                'description_ku' => 'ڤاڵڤی EGR هەندێک گازی دەرپەڕاو دەنێرێتەوە ناو مەکینە بۆ کەمکردنەوەی دەرپەڕاندن. ئەم کۆدە واتە ڕێژەکەی کەمە.',
-                'symptoms_en' => "Check Engine Light on\nEngine knocking under acceleration\nRough idle\nFailed emissions test",
-                'symptoms_ku' => "ڕووناکی پشکنینی مەکینە\nلێدانی مەکینە لە کاتی گازدان\nبێکاری ناڕێک\nتێکچوونی تاقیکردنەوەی دەرپەڕاندن",
-                'possible_causes_en' => "EGR valve is clogged with carbon — very common\nEGR passages inside the intake are blocked\nEGR vacuum hose is broken\nEGR solenoid failed",
-                'possible_causes_ku' => "ڤاڵڤی EGR بە کاربۆن گیراوە — زۆر باوە\nڕێڕەوی EGR لە ناو مەکینەدا داخراوە\nشیلانەی ڤاکیوومی EGR شکاوە\nسۆلینۆیدی EGR تێکچووە",
-                'how_to_fix_en' => "1. The EGR valve looks like a small metal mushroom on top of the engine — connected to the exhaust. Tap it gently with a wrench — sometimes it's just stuck.\n2. Remove the EGR valve (2-3 bolts), spray inside with carb cleaner, scrub away the black carbon buildup with a wire brush.\n3. While it's off, poke a screwdriver into the passages on the engine side — they often clog with carbon too.\n4. Reinstall and test. If the code comes back, replace the EGR valve ($80-200).\n5. Check the small vacuum hose going to the EGR — if cracked, replace it ($5 for hose).",
-                'how_to_fix_ku' => "١. ڤاڵڤی EGR وەک قارچکێکی کانزایی بچووک لە سەر مەکینەیە — بە دەرپەڕاو بەستراوە. بە ئەنبر بە هێواشی لێی بدە — هەندێک جار تەنها گیرساوە.\n٢. ڤاڵڤەکە دەرکە (٢-٣ بۆڵت)، بە پاککەرەوە پاکی بکەرەوە، ڕەشی کاربۆن بە فرچەی وایەر بتاشرەوە.\n٣. کاتێک دەرکراوە، دەرزی لە ڕێڕەوەکانی لای مەکینە بدە — زۆر جار بە کاربۆن گیراون.\n٤. دووبارە دایبنێ و تاقی بکەرەوە. ئەگەر کۆدەکە گەڕایەوە، ڤاڵڤی EGR بگۆڕە (٨٠-٢٠٠ دۆلار).\n٥. شیلانەی ڤاکیوومی بچووک کە بۆ EGR دەڕوات بپشکنە — ئەگەر درزی تێدایە، بیگۆڕە.",
-                'system' => 'Emissions'
-            ],
-            [
-                'code' => 'P0420', 'code_type' => 'P', 'severity' => 'high',
-                'title_en' => 'Catalyst System Efficiency Below Threshold',
-                'title_ku' => 'کارایی کاتالیست لە خوار ئاستی پێویست',
-                'description_en' => 'The catalytic converter is not cleaning exhaust properly. This can be the converter itself or something causing it to fail.',
-                'description_ku' => 'کاتالیست بە باشی گازی دەرپەڕاو پاک ناکاتەوە. لەوانەیە خودی کاتالیست بێت یان شتێک وای لێبکات تێکبچێت.',
-                'symptoms_en' => "Check Engine Light on\nSulfur / rotten egg smell from exhaust\nPoor fuel economy\nCar may feel sluggish at high speeds",
-                'symptoms_ku' => "ڕووناکی پشکنینی مەکینە\nبۆنی گۆگرد / هێلکەی بۆگەن لە دەرپەڕاو\nسوتەمەنی خراپ\nئۆتۆمبێل لە خێرایی بەرزدا سستە",
-                'possible_causes_en' => "Catalytic converter is worn out (they last 100,000-150,000 km)\nExhaust leak before the converter\nO2 sensors are giving wrong readings\nEngine misfire damaged the converter\nUsing leaded or wrong fuel",
-                'possible_causes_ku' => "کاتالیست پیر بووە (١٠٠-١٥٠ هەزار کم دەمێنێتەوە)\nدەرچوونی دەرپەڕاو پێش کاتالیست\nهەستیاری O2 خوێندنەوەی هەڵە دەدات\nسوتانی مەکینە زیانی بە کاتالیست گەیاندووە\nسوتەمەنی هەڵە بەکار هاتووە",
-                'how_to_fix_en' => "⚠️ Catalytic converters are expensive ($500-2000). Before replacing, try cheaper fixes:\n\n1. Add catalytic converter cleaner to your fuel tank ($15-25) — drive for a week and see if the code clears.\n2. Check for exhaust leaks first — any hole before the converter causes this code. Look under the car for rust holes in the exhaust pipe.\n3. Replace the downstream O2 sensor (after the converter) — costs $50-100 and often fixes this.\n4. If you had a misfire before this code appeared, the converter may be damaged. Replace spark plugs and fix misfires FIRST, then clear codes.\n5. If converter is truly dead, you need a new one. Some cars have 2 converters — make sure you replace the right one.",
-                'how_to_fix_ku' => "⚠️ کاتالیست گرانە (٥٠٠-٢٠٠٠ دۆلار). پێش گۆڕین، چارەسەری هەرزانتر تاقی بکە:\n\n١. پاککەرەوەی کاتالیست بە بەنزین زیاد بکە (١٥-٢٥ دۆلار) — هەفتەیەک بڕۆ و ببینە کۆدەکە دەڕوات.\n٢. سەرەتا بۆ دەرچوونی دەرپەڕاو بگەڕێ — هەر کونێک پێش کاتالیست دەبێتە هۆی ئەم کۆدە. لە ژێر ئۆتۆمبێل بڕوانە بۆ کونی ژەنگاوی.\n٣. هەستیاری O2 ی دوای کاتالیست بگۆڕە — ٥٠-١٠٠ دۆلار و زۆر جار چارەسەر دەکات.\n٤. ئەگەر پێش ئەم کۆدە سوتانێک هەبوو، لەوانەیە کاتالیست زیانی پێگەیشتبێت. یەکەم پڵگی فیشەر بگۆڕە و سوتانەکان چاک بکە.\n٥. ئەگەر کاتالیست بە تەواوی خراپە، پێویستت بە نوێیە. هەندێک ئۆتۆمبێل ٢ کاتالیستیان هەیە.",
-                'system' => 'Emissions'
-            ],
-            [
-                'code' => 'P0442', 'code_type' => 'P', 'severity' => 'medium',
-                'title_en' => 'EVAP System Small Leak Detected',
-                'title_ku' => 'دەرچوونی بچووکی EVAP',
-                'description_en' => 'A small leak in the fuel vapor system. This does NOT affect how your car drives — it\'s an emissions issue.',
-                'description_ku' => 'دەرچوونێکی بچووک لە سیستەمی هەڵمی سوتەمەنی. ئەمە کار ناکاتە سەر لێخوڕینی ئۆتۆمبێلەکەت — کێشەی دەرپەڕاندنە.',
-                'symptoms_en' => "Check Engine Light on\nSlight fuel smell outside the car\nNothing else — car drives fine",
-                'symptoms_ku' => "ڕووناکی پشکنینی مەکینە\nکەمێک بۆنی سوتەمەنی لە دەرەوە\nهیچی تر — ئۆتۆمبێل باش دەڕوات",
-                'possible_causes_en' => "Gas cap is loose — #1 cause!\nGas cap seal is cracked or missing\nSmall crack in EVAP hose\nPurge valve slightly leaking\nCharcoal canister has a tiny crack",
-                'possible_causes_ku' => "سەرپۆشی بەنزین شلە — هۆکاری ژمارە ١!\nمۆری سەرپۆشی بەنزین درزی تێدایە یان ونە\nدرزی بچووک لە شیلانەی EVAP\nڤاڵڤی پاککەرەوە کەمێک دەرچووە\nقەڵەمی ڕەژوو درزی وردی تێدایە",
-                'how_to_fix_en' => "1. Check your gas cap! Take it off and put it back on — turn until it clicks 3+ times. Clear the code and drive. This fixes it 80% of the time.\n2. Inspect the gas cap rubber seal — if it's cracked or missing, buy a new cap ($15-25).\n3. Look at the EVAP hoses near the engine — they're small black plastic tubes. Look for cracks or disconnected ends.\n4. If the code comes back, you may need a smoke test to find the leak — any mechanic can do this for $50-100.\n5. This code won't damage your car — you can drive normally while figuring it out.",
-                'how_to_fix_ku' => "١. سەرپۆشی بەنزینەکەت بپشکنە! دەریبکە و دووبارە دایبخە — بیسوڕێنە تا ٣+ کرتە دەکات. کۆدەکە بسڕەوە و بڕۆ. ئەمە ٨٠٪ی کات چارەسەر دەکات.\n٢. مۆری لاستیکی سەرپۆشی بەنزین بپشکنە — ئەگەر درزی تێدایە یان ونە، سەرپۆشێکی نوێ بکڕە (١٥-٢٥ دۆلار).\n٣. شیلانەکانی EVAP لە نزیک مەکینە بپشکنە — بۆڕی پلاستیکی ڕەشی بچووکن. بۆ درز یان سەری جیابووەوە بگەڕێ.\n٤. ئەگەر کۆدەکە گەڕایەوە، پێویستت بە تاقیکردنەوەی دووکەڵە بۆ دۆزینەوەی دەرچوون — هەر میکانیکێک دەتوانێت بە ٥٠-١٠٠ دۆلار بیکات.\n٥. ئەم کۆدە زیان بە ئۆتۆمبێل ناگەیەنێت — دەتوانیت بە ئاسایی بڕۆیت.",
-                'system' => 'EVAP System'
-            ],
-            [
-                'code' => 'P0455', 'code_type' => 'P', 'severity' => 'medium',
-                'title_en' => 'EVAP System Large Leak Detected',
-                'title_ku' => 'دەرچوونی گەورەی EVAP',
-                'description_en' => 'A large leak in the fuel vapor system. Usually easier to find than a small leak.',
-                'description_ku' => 'دەرچوونێکی گەورە لە سیستەمی هەڵمی سوتەمەنی. زۆر جار ئاسانترە لە دەرچوونی بچووک بدۆزرێتەوە.',
-                'symptoms_en' => "Check Engine Light on\nStrong fuel smell\nSlightly lower MPG",
-                'symptoms_ku' => "ڕووناکی پشکنینی مەکینە\nبۆنی بەهێزی سوتەمەنی\nکەمێک کەمتر سوتەمەنی",
-                'possible_causes_en' => "Gas cap is missing or completely loose\nEVAP hose has come off or split open\nPurge valve stuck open\nCharcoal canister cracked open\nFuel tank has a hole or leak",
-                'possible_causes_ku' => "سەرپۆشی بەنزین ونە یان بە تەواوی شلە\nشیلانەی EVAP دەرچووە یان بە تەواوی درزیوە\nڤاڵڤی پاککەرەوە بە کراوەیی گیرساوە\nقەڵەمی ڕەژوو بە تەواوی درزیوە\nبەنزین دەزگا کونی تێدایە",
-                'how_to_fix_en' => "1. Is your gas cap still there? Check immediately — missing cap causes this every time. Replace cap ($15-25).\n2. Look under the car near the fuel tank — any wet spots or dripping? Strong fuel smell means a real leak — tow to mechanic.\n3. Check the EVAP purge valve — it's near the engine, a small cylinder with 2 hoses. When the car is off, you should NOT be able to blow through it. If you can, it's stuck open — replace ($30-60).\n4. Inspect all black plastic EVAP hoses — one may have popped off. Push it back on firmly.\n5. If nothing visible, get a smoke test done.",
-                'how_to_fix_ku' => "١. ئایا سەرپۆشی بەنزین هێشتا ماوە؟ یەکسەر بپشکنە — سەرپۆشی ون بوو هەموو جارێک دەبێتە هۆی ئەمە. سەرپۆش بگۆڕە (١٥-٢٥ دۆلار).\n٢. لە ژێر ئۆتۆمبێل نزیک دەزگای سوتەمەنی بڕوانە — شوێنی تەڕ یان دڵۆپە هەیە؟ بۆنی زۆری سوتەمەنی واتە دەرچوونی ڕاستەقینە.\n٣. ڤاڵڤی پاککەرەوەی EVAP بپشکنە — لە نزیک مەکینەیە، سلندەرێکی بچووکە ٢ شیلانەی هەیە. کاتێک ئۆتۆمبێل کوژاوە، نابێت بتوانیت فووی پێدا بکەیت.\n٤. هەموو شیلانە پلاستیکییەکانی EVAP بپشکنە — لەوانەیە یەکێکیان دەرچووبێت. بە توندی پاڵی پێوە بنێ.\n٥. ئەگەر هیچ دیار نییە، تاقیکردنەوەی دووکەڵ بکە.",
-                'system' => 'EVAP System'
-            ],
         ];
 
         foreach ($codes as $code) {
             FaultCode::create($code);
         }
-
-        echo "Seeded " . count($codes) . " fault codes with how-to-fix instructions.\n";
+        
+        echo "Seeded " . count($codes) . " fault codes.\n";
     }
 }

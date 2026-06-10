@@ -3,10 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SavedItem extends Model
 {
-    protected $fillable = ['user_id', 'savable_type', 'savable_id'];
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'savable_type',
+        'savable_id',
+    ];
 
     public function user()
     {

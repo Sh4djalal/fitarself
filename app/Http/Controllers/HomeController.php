@@ -3,23 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use App\Models\Ad;
-use App\Models\User;
 use App\Models\FaultCode;
+use App\Models\User;
+use App\Models\Part;
+use App\Models\Ad;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $ads = Ad::active()->orderBy('sort_order')->limit(3)->get();
-        $popularCars = Car::orderBy('review_count', 'desc')->limit(4)->get();
-        $faultCodes = FaultCode::orderBy('severity', 'desc')->limit(4)->get();
+        // Get popular cars (for the homepage)
+        $popularCars = Car::orderBy('review_count', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->limit(8)
+            ->get();
+        
+        // Get common fault codes
+        $faultCodes = FaultCode::orderBy('severity', 'desc')
+            ->limit(8)
+            ->get();
+        
+        // Get featured/verified mechanics
         $mechanics = User::where('role', 'mechanic')
-                         ->where('is_verified_mechanic', true)
-                         ->with('mechanicDetail')
-                         ->limit(3)
-                         ->get();
-
-        return view('welcome', compact('ads', 'popularCars', 'faultCodes', 'mechanics'));
+            ->where('is_verified_mechanic', true)
+            ->with('reviews')
+            ->limit(6)
+            ->get();
+        
+        // Get ads for carousel
+        $ads = Ad::orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+        
+        // Pass all variables to welcome.blade.php
+        return view('welcome', compact('popularCars', 'faultCodes', 'mechanics', 'ads'));
     }
 }
